@@ -71,9 +71,8 @@ players = [
 class Ball:
     def __init__(self, x,y,speed):
         self.pos = [x,y]
-        self.image = pygame.image.load("ball.png").convert()
-
-
+        self.image = pygame.transform.scale(pygame.image.load("ball.png").convert_alpha(), (40, 40))
+        self.rect = self.image.get_rect()
 
         angle = pi / 2
         while abs(cos(angle)) < 0.1 or abs(cos(angle)) > 0.9:
@@ -89,10 +88,9 @@ class Ball:
         factor = 1.1
         self.speed[0] *= factor
         self.speed[1] *= factor
-    def draw(self):
-
-
-     pygame.draw.circle(surface,(255,255,255),list(map(rndint,self.pos)),self.radius)
+    def draw(self, screen):
+        screen.blit(self.image, list(map(rndint,self.pos)))
+        #pygame.draw.circle(surface,(255,255,255),list(map(rndint,self.pos)),self.radius)
 
 
 balls = []
@@ -166,7 +164,7 @@ def draw():
     surface.blit(background, (0,0))
 
     for ball in balls:
-        ball.draw()
+        ball.draw(surface)
     for player in players:
         for paddle in player.paddles:
             paddle.draw(player.color)
