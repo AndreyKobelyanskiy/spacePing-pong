@@ -69,9 +69,8 @@ players = [
 ]
 
 class Ball:
-    def __init__(self, x,y, speed):
+    def __init__(self, x,y,speed):
         self.pos = [x,y]
-        #self.trail = []
         self.image = pygame.image.load("ball.png").convert()
 
 
@@ -82,9 +81,7 @@ class Ball:
         self.speed = [speed*cos(angle),speed*sin(angle)]
 
         self.radius = 10
-    #def update(self):
-        #self.trail = [self.pos + [self.radius]] + self.trail
-        #while len(self.trail) > 10: self.trail = self.trail[:-1]
+
     def move(self, dt):
         self.pos[0] += dt*self.speed[0]
         self.pos[1] += dt*self.speed[1]
@@ -110,10 +107,7 @@ def get_input():
         for paddle in player.paddles:
             paddle.update(keys)
     return True
-"""def update():
-    for ball in balls:
-        ball.update()
-        """
+
 
 between_rounds_timer = 3.0
 def move():
